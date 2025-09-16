@@ -44,11 +44,71 @@ A simple multi-user Vehicle Parking Management Web App built using **Flask**, **
 
 ## 🎥 Video Demo
 
-📂 [Watch Explanation Video on Google Drive](https://drive.google.com/your-video-link)
+📂 https://drive.google.com/file/d/1OAGhlKo35PAy1-pzfxdsMS8PLH9ng2GY/view?usp=drive_link
 
-> *(Replace with your actual video link once uploaded)*
+NOTE : To open this all must have a valid iitm.ac.in email id 
+Learners outside the system of IIT Madras need to ask for permission via gmail.
 
----
 
-## 🗃️ Directory Structure
+## 📚 Project Report :
+
+The Link of the project report is :
+
+📂 https://docs.google.com/document/d/1AZfhAa69oYk5N_B3m-0ZITWaK6j97USM/edit?usp=drive_link&ouid=106565817420713086394&rtpof=true&sd=true
+
+NOTE : All learners having a valid iitm.ac.in email id can view and comment
+However Those without are mere viewers .
+
+## 🗃️ Directory Structure :
+
+$ tree -a -I 'venv|.git'
+.
+├── app.py
+├── .gitignore
+├── instance
+│   └── parking.db
+├── models
+│   └── db_init.sql
+├── README.md
+├── requirements.txt
+├── static
+│   ├── images
+│   │   ├── adm001.jpg
+│   │   ├── adm002.jpg
+│   │   ├── adm003.jpg
+│   │   ├── adm004.jpg
+│   │   ├── adm005.jpg
+│   │   ├── adm006.jpg
+│   │   ├── adm007.jpg
+│   │   ├── adm008.jpg
+│   │   ├── adm009.jpg
+│   │   ├── adm010.jpg
+│   │   ├── banjara.jpg
+│   │   ├── commstreet.jpg
+│   │   ├── connaught.jpg
+│   │   ├── howrah.jpg
+│   │   ├── jlnstadium.jpg
+│   │   ├── marinedrive.jpg
+│   │   ├── mgroad.jpg
+│   │   ├── parkstreet.jpg
+│   │   ├── phoenix.jpg
+│   │   └── sector17.jpg
+│   └── style.css
+├── templates
+│   ├── about.html
+│   ├── admin_dashboard.html
+│   ├── base.html
+│   ├── index.html
+│   ├── login.html
+│   ├── logout.html
+│   ├── register.html
+│   └── user_dashboard.html
+└── utils
+    ├── db.py
+    ├── __init__.py
+    └── __pycache__
+        ├── db.cpython-313.pyc
+        └── __init__.cpython-313.pyc
+
+8 directories, 39 files
 
