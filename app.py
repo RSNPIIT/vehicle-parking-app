@@ -1,3 +1,5 @@
+#The flask code that helps the python file to Run nicely without giving errors something which usually happens
+
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from utils.db import get_connection
 from datetime import datetime
