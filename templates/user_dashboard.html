@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Toast Container -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+  <div id="actionToast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toastMsg"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Welcome to the Vehicle Parking Portal</h2>
+  {% if user_booked_spot %}
+  <div class="alert alert-warning d-flex justify-content-between align-items-center">
+    <div>
+      <strong>Current Booking:</strong> {{ user_booked_spot }}
+    </div>
+    <form action="{{ url_for('release_spot') }}" method="post" class="mb-0">
+      <input type="hidden" name="spot" value="{{ user_booked_spot }}">
+      <button type="submit" class="btn btn-sm btn-danger">Release Spot</button>
+    </form>
+  </div>
+{% endif %}
+
+
+  <div class="row">
+    {% for lot in parking_lots %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <img src="{{ url_for('static', filename='images/' ~ lot.image) }}" class="card-img-top" alt="{{ lot.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ lot.name }}</h5>
+          <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal{{ lot.id }}">
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for each parking lot -->
+    <div class="modal fade" id="modal{{ lot.id }}" tabindex="-1" aria-labelledby="modalLabel{{ lot.id }}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel{{ lot.id }}">{{ lot.name }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Address:</strong> {{ lot.address }}</p>
+            <p><strong>Price:</strong> ₹{{ lot.price }}/hour</p>
+          </div>
+          <div class="modal-footer">
+            {% if user_booked_spot == lot.name %}
+              <!-- User has booked this spot -->
+              <form action="{{ url_for('release_spot') }}" method="post">
+                <input type="hidden" name="spot" value="{{ lot.name }}">
+                <button type="submit" class="btn btn-danger">Release Spot</button>
+              </form>
+            {% elif not user_booked_spot %}
+              <!-- No booking yet -->
+              <form action="{{ url_for('book_spot') }}" method="post">
+                <input type="hidden" name="spot" value="{{ lot.name }}">
+                <button type="submit" class="btn btn-primary">Book Now</button>
+              </form>
+            {% else %}
+              <!-- Already booked another -->
+              <p class="text-muted">You already booked: <strong>{{ user_booked_spot }}</strong></p>
+            {% endif %}
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="actionToast" class="toast text-white" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toastMsg">Placeholder</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function getQueryParam(param) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    }
+
+    const msg = getQueryParam("msg");
+    if (msg) {
+      const toastEl = document.getElementById("actionToast");
+      const toastMsg = document.getElementById("toastMsg");
+
+      const messageMap = {
+        "booked": { text: "Slot booked successfully!", bg: "bg-success" },
+        "released": { text: "Slot released successfully!", bg: "bg-info" },
+        "already_booked": { text: "You already have a slot booked.", bg: "bg-warning" },
+        "access_denied": { text: "Access denied.", bg: "bg-danger" } ,
+        "spot_taken": { text: "Sorry, this spot is already taken.", bg: "bg-danger" }
+
+      };
+
+      const data = messageMap[msg];
+      if (data) {
+        toastEl.classList.remove("bg-success", "bg-info", "bg-warning", "bg-danger");
+        toastEl.classList.add(data.bg);
+        toastMsg.textContent = data.text;
+
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+      }
+    }
+  });
+</script>
+
+
+{% endblock %}

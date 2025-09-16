@@ -1,0 +1,114 @@
+body {
+    background-color: #00bfff;   /* Deep Sky Blue */
+    color: #000000;              /* Black text for contrast */
+    font-family: 'Segoe UI', sans-serif;
+    padding: 2rem;
+    text-align: center;
+}
+
+a {
+  display: block;
+  margin: 8px 0;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+input[type="submit"] {
+  width: 120px;
+  height: 40px;
+  font-size: 16px;
+  background-color: #0044cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+  background-color: #0066ff;
+}
+
+/* Headings */
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff; /* White heading text */
+    margin-bottom: 1rem;
+}
+
+/* Paragraphs */
+p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #111111;
+    margin-top: 0.5rem;
+}
+a[href="/about"] {
+    color: yellow;
+}
+a[href="/"] {
+    color: yellow;
+}
+/* Links */
+a {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #003366; /* Navy-ish blue for contrast */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #001f4d;
+    text-decoration: underline;
+}
+
+table {
+  border-collapse: collapse;
+  width: 60%;
+  margin-top: 20px;
+}
+th {
+  background-color: #444;
+  color: white;
+}
+td, th {
+  padding: 10px;
+  text-align: center;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.lot-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lot-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* static/style.css */
+.hover-shadow:hover {
+  transform: translateY(-5px);
+  transition: 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
